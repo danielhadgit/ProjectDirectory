@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFluid - Effortless Task Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-bg"></div>
+        <nav>
+            <div class="logo">
+                <span class="droplet">💧</span> TaskFluid
+            </div>
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </nav>
+        
+        <main>
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Welcome to TaskFluid</h1>
+                    <p>Seamlessly manage your tasks with our beautiful, intuitive interface</p>
+                </div>
+                
+                <div class="login-container glass-card">
+                    <h2>Login</h2>
+                    <form id="loginForm" class="login-form">
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="login-btn">Login</button>
+                        <p class="error-message" id="errorMessage"></p>
+                        <p class="toggle-form">
+                            Don't have an account? <a href="#" id="toggleRegister">Register</a>
+                        </p>
+                    </form>
+
+                    <form id="registerForm" class="register-form" style="display: none;">
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="registerEmail" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="registerPassword" placeholder="Password" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                        </div>
+                        <button type="submit" class="login-btn">Register</button>
+                        <p class="error-message" id="registerErrorMessage"></p>
+                        <p class="toggle-form">
+                            Already have an account? <a href="#" id="toggleLogin">Login</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDNnPGoBGk9E2_yPNH75hksVSyrdUg-Hmg",
+            authDomain: "fluidtask-38918.firebaseapp.com",
+            projectId: "fluidtask-38918",
+            storageBucket: "fluidtask-38918.firebasestorage.app",
+            messagingSenderId: "718013803913",
+            appId: "1:718013803913:web:f5f40f70a84478aaef8558",
+            measurementId: "G-NS76PLHRF4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Form toggle functionality
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const toggleRegister = document.getElementById('toggleRegister');
+        const toggleLogin = document.getElementById('toggleLogin');
+
+        toggleRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        toggleLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Login functionality
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                // Redirect to TaskFluid dashboard
+                window.location.href = 'TaskFluid.html';
+            } catch (error) {
+                errorMessage.textContent = error.message;
+            }
+        });
+
+        // Register functionality
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorMessage = document.getElementById('registerErrorMessage');
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords don't match";
+                return;
+            }
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                // Redirect to TaskFluid dashboard
+                window.location.href = 'TaskFluid.html';
+            } catch (error) {
+                errorMessage.textContent = error.message;
+            }
+        });
+    </script>
+ </body>
+</html>

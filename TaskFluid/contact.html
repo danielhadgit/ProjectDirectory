@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - TaskFluid</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-bg"></div>
+        <nav>
+            <div class="logo">
+                <span class="droplet">💧</span> TaskFluid
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+        </nav>
+        
+        <main>
+            <div class="content-container">
+                <div class="glass-card contact-section">
+                    <h1>Contact Us</h1>
+                    <form id="contactForm" class="contact-form" action="https://formspree.io/f/mldogdbr" method="POST">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="name" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" name="email" id="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-message"></i>
+                            <textarea name="message" id="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="glass-btn glass-card">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div id="thankyouMessage" class="thank-you-message" style="display: none;">
+                        <h2>Thank You! 💧</h2>
+                        <p>Your message has been sent successfully. We'll get back to you soon!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="credit-section">
+                    <p>Made By Daniel Hadfield</p>
+                </div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </main>
+    </div>
+    <script src="scripts.js"></script>
+    <script src="contact.js"></script>
+</body>
+</html>

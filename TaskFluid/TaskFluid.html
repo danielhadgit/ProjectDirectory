@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFluid - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard">
+    <div class="container">
+        <div class="glass-bg"></div>
+        <nav>
+            <div class="logo">
+                <a href="TaskFluid.html" class="home-link">
+                    <span class="droplet">💧</span> TaskFluid
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </nav>
+        
+        <main class="board-container">
+            <div class="board-wrapper">
+                <!-- Task Lists Container -->
+                <div class="lists-container">
+                    <!-- To Do List -->
+                    <div class="list glass-card" data-list-id="todo">
+                        <div class="list-header">
+                            <h3>To Do</h3>
+                            <button class="add-task-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="task-list" id="todo">
+                        </div>
+                    </div>
+
+                    <!-- In Progress List -->
+                    <div class="list glass-card" data-list-id="in-progress">
+                        <div class="list-header">
+                            <h3>In Progress</h3>
+                            <button class="add-task-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="task-list" id="inprogress">
+                        </div>
+                    </div>
+
+                    <!-- Done List -->
+                    <div class="list glass-card" data-list-id="done">
+                        <div class="list-header">
+                            <h3>Done</h3>
+                            <button class="add-task-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="task-list" id="done">
+                        </div>
+                    </div>
+
+                    <!-- Add List Button -->
+                    <div class="add-list">
+                        <button class="add-list-btn glass-card">
+                            <i class="fas fa-plus"></i> Add Another List
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Task Modal -->
+        <div class="modal" id="taskModal">
+            <div class="modal-content glass-card">
+                <div class="modal-header">
+                    <h2>Add Task</h2>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="taskForm">
+                    <div class="input-group">
+                        <i class="fas fa-tasks"></i>
+                        <input type="text" id="taskTitle" placeholder="Task Title" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-align-left"></i>
+                        <textarea id="taskDescription" placeholder="Task Description" required></textarea>
+                    </div>
+                    <div class="priority-buttons">
+                        <div class="priority-label">Priority Level:</div>
+                        <div class="priority-options">
+                            <button type="button" class="priority-btn" data-priority="low">
+                                <i class="fas fa-arrow-down"></i> Low
+                            </button>
+                            <button type="button" class="priority-btn selected" data-priority="medium">
+                                <i class="fas fa-minus"></i> Medium
+                            </button>
+                            <button type="button" class="priority-btn" data-priority="high">
+                                <i class="fas fa-arrow-up"></i> High
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="glass-submit-btn">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+   <script type="module" src="taskfluid.js"></script>
+    <!-- Firebase SDK -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDNnPGoBGk9E2_yPNH75hksVSyrdUg-Hmg",
+        authDomain: "fluidtask-38918.firebaseapp.com",
+        projectId: "fluidtask-38918",
+        storageBucket: "fluidtask-38918.firebasestorage.app",
+        messagingSenderId: "718013803913",
+        appId: "1:718013803913:web:f5f40f70a84478aaef8558",
+        measurementId: "G-NS76PLHRF4"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Make Firebase instances available globally
+    window.firebaseInstance = {
+        app,
+        auth,
+        db
+    };
+</script>
+</body>
+</html>
